@@ -85,7 +85,7 @@ class Token(Base):
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime, server_default=func.now())
     user_id: Mapped[int] = mapped_column(ForeignKey(
-        "user.id", ondelete="CASCADE"))
+        "user.id"))
     user: Mapped[User] = relationship(
         User, lazy="joined", back_populates="tokens")
 
