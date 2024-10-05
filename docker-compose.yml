@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:14.3-alpine3.15
+    ports:
+      - "5431:5432"
+    env_file:
+      - .env
+    restart: always
+  app:
+    build: .
+    ports:
+      - "80:8080"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: always

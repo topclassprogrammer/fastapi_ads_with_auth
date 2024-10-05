@@ -1,0 +1,92 @@
+# Примеры REST API-запросов
+
+@baseURL = http://127.0.0.1:80
+
+###
+
+# Регистрация
+POST {{baseURL}}/user
+Content-Type: application/json
+
+{
+"name": "user_1",
+"password": "12345678"
+}
+
+###
+
+# Аутентификация(получение токена)
+POST {{baseURL}}/login
+Content-Type: application/json
+
+{
+"name": "user_1",
+"password": "12345678"
+}
+
+###
+
+# Получение пользователя
+GET {{baseURL}}/user/3
+Content-Type: application/json
+
+###
+
+# Обновление пользователя
+PATCH {{baseURL}}/user/3
+Content-Type: application/json
+x-token: 9736926a-0e73-4a3b-9433-4e3f1dcb98f2
+
+{
+"name": "new_user_33"
+}
+
+###
+
+# Удаление пользователя
+DELETE {{baseURL}}/user/3
+Content-Type: application/json
+x-token: 9736926a-0e73-4a3b-9433-4e3f1dcb98f2
+
+###
+
+# Создание объявления
+POST {{baseURL}}/advertisement
+Content-Type: application/json
+x-token: 9736926a-0e73-4a3b-9433-4e3f1dcb98f2
+
+{
+"title": "iPhone 16 Pro",
+"description": "новый",
+"price": 199599.99
+}
+
+###
+
+# Получение объявления
+GET {{baseURL}}/advertisement/1
+Content-Type: application/json
+
+###
+
+# Получение объявления из query string
+GET {{baseURL}}/advertisement?created_at=2024-10-05
+Content-Type: application/json
+
+###
+
+# Обновление объявления
+PATCH {{baseURL}}/advertisement/1
+Content-Type: application/json
+x-token: e5db884c-c65a-4cd0-bd95-ddaddfc1aa6e
+
+{
+"description": "б/у"
+}
+
+###
+
+# Удаление объявления
+DELETE {{baseURL}}/advertisement/1
+Content-Type: application/json
+x-token: d0fd4411-f599-447a-bca4-3996b6c58099
