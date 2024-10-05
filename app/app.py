@@ -71,8 +71,8 @@ async def login(login_data: schema.LoginRequest, session: SessionDependency):
     user_query = select(User).where(User.name == login_data.name)
     user = await session.scalar(user_query)
     if not user or not auth.check_password(login_data.password, user.password):
-        raise HTTPException(status_code=401, detail="User or password is "
-                                                    "incorrect")
+        raise HTTPException(
+            status_code=401, detail="User or password is incorrect")
     token = Token(user_id=user.id)
     await add_item(token, session)
     return {"token": token.token}
@@ -88,16 +88,16 @@ async def get_advertisement_from_qs(
     # Ограничение: поиск возможен только по одному параметру
     if "&" in query_params_str:
         raise HTTPException(
-            status_code=400, detail="Too many parameters in query string"
-        )
+            status_code=400, detail="Too many parameters in query string")
     if "=" not in query_params_str:
-        raise HTTPException(status_code=400, detail="Invalid query parameters")
+        raise HTTPException(
+            status_code=400, detail="Invalid query parameters")
     query_param = query_params_str.split("=")
     field = query_param[0]
     value = query_param[1]
     if field not in Advertisement.__dict__.keys():
-        raise HTTPException(status_code=400,
-                            detail=f"Field {field} does not exist")
+        raise HTTPException(
+            status_code=400, detail=f"Field {field} does not exist")
     items = await search_items(session, Advertisement, field, value)
     return [item.dict for item in items]
 
